@@ -3,6 +3,8 @@ package com.wen.springboot.controller;
 
 import com.wen.springboot.entity.User;
 import com.wen.springboot.service.UserService;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,7 @@ public class UserController {
     @RequestMapping(value = "getUser/{id}", method = RequestMethod.GET)
     //    http://localhost:8080/testBoot/getUser?id=1(此处1为要获取的id）
     //    @RequestMapping(value = "/getUser", method = RequestMethod.GET)
+    @ApiOperation("获取用户信息")
     public String GetUser(@PathVariable int id) {
         return userService.getUserInfo(id).toString();
     }
@@ -57,7 +60,7 @@ public class UserController {
 
     //打印所有用户信息
     //    http://localhost:8080/testBoot/selectAll
-    @RequestMapping("/selectAll")
+    @RequestMapping(value = "/selectAll",method = RequestMethod.POST)
     @ResponseBody
     public List<User> ListUser() {
         return userService.selectAll();
